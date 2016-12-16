@@ -13,9 +13,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @customer = @comment.customer
     @comments = @customer.comments
-    if @comment.save
+    if @comment.valid?
+      @comment.save
       redirect_to customer_path(@comment.customer_id)
     else
+# flashに設定せずに@commentのエラーをviewで出力する処理を作成しているので
+# 下記の1行は不要です
+      # flash[:alert] = @comment.errors.full._messages
+      
       render template: "customers/show"
     end
   end

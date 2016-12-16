@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-    redirect_to @customer
+      redirect_to @customer
     else
       render :edit
     end
@@ -43,17 +43,17 @@ class CustomersController < ApplicationController
   end
 
   private
-    def set_customer
+  def set_customer
     @customer = Customer.find(params[:id])
-    end
+  end
   
-    def customer_params
-      params.require(:customer).permit(
+  def customer_params
+    params.require(:customer).permit(
       :family_name,
       :given_name,
       :email,
       :company_id,
       :post_id
       )
-   end
+  end
 end
