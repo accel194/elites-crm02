@@ -13,21 +13,19 @@
     </dl>
       <%= link_to '編集', edit_customer_path(@customer), class: "btn btn-default" %>
       <%= link_to '戻る', customers_path, class: "btn btn-default" %>
-        
     <hr />
     <h2>対応履歴</h2>
-    <% @comments.each do |comment| %>
-      <div class="media">
-        <div class="media-body">
-          <%= simple_format(comment.body) %>
-          <p class="text-muted">
-            投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
-            <%= link_to "削除する", comment_path(comment), method: :delete %>
-          </p>
+      <% @comments.each do |comment| %>
+        <div class="media">
+          <div class="media-body">
+            <%= simple_format(comment.body) %>
+            <p class="text-muted">
+              投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
+              <%= link_to "削除する", comment_path(comment), method: :delete %>
+            </p>
+          </div>
         </div>
-      </div>
-    <% end %>
-                  
+      <% end %>
 <!-- form_forを使用するとHTMLのフォーム(入力する項目)を生成します -->
 <!-- reviewという変数は今回のcrmにはまったく関係ありません -->
 <!-- CAMPのレジュメからのコピーはやめましょう！理解して書いて頂きたいです -->
@@ -36,18 +34,18 @@
       <% if @comment.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
 <!-- commentという変数は存在しません -->                
-          <div><%= @comment.errors.count %> 件のエラーがあります。</div>
-          <ul>
+          <div><%= @comment.errors.count %> 件のエラーがあります。
+          </div>
+            <ul>
 <!-- commenという変数は存在しません -->
 <!-- eachの行に「=」を付けてしまうとHTMLとして出力されてしまうので、「=」 -->
-          <% @comment.errors.full_messages.each do |comment| %>
-            <li><%= comment %></li>
-          <% end %>
-          </ul>
+              <% @comment.errors.full_messages.each do |comment| %>
+                <li><%= comment %></li>
+              <% end %>
+            </ul>
         </div>    
       <% end %>
     <% end %>
-
     <%= form_for(@comment, url: { controller: :comments, action: :create }) do |f| %>
       <div class="form-group">
         <%= f.label :body, '対応内容' %><br>
