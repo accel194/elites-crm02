@@ -25,37 +25,24 @@
             </p>
           </div>
         </div>
-<<<<<<< HEAD
       </div>
     <% end %>
-=======
-      <% end %>
-<!-- form_forを使用するとHTMLのフォーム(入力する項目)を生成します -->
-<!-- reviewという変数は今回のcrmにはまったく関係ありません -->
-<!-- CAMPのレジュメからのコピーはやめましょう！理解して書いて頂きたいです -->
->>>>>>> fd768e7ebd74e0a1f99021afef72ee859ba86772
     <%= form_for(@comment) do |f| %>
       <% if @comment.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
-<<<<<<< HEAD
           <div><%= @comment.errors.count %> 件のエラーがあります。</div>
           <ul>
           <% @comment.errors.full_messages.each do |comment| %>
             <li><%= comment %></li>
           <% end %>
           </ul>
-=======
-<!-- commentという変数は存在しません -->                
           <div><%= @comment.errors.count %> 件のエラーがあります。
           </div>
             <ul>
-<!-- commenという変数は存在しません -->
-<!-- eachの行に「=」を付けてしまうとHTMLとして出力されてしまうので、「=」 -->
               <% @comment.errors.full_messages.each do |comment| %>
                 <li><%= comment %></li>
               <% end %>
             </ul>
->>>>>>> fd768e7ebd74e0a1f99021afef72ee859ba86772
         </div>    
       <% end %>
     <% end %>
