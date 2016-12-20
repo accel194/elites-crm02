@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :detroy]
+  before_action :authenticate_user!
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   def index
     
@@ -46,7 +46,6 @@ class CustomersController < ApplicationController
   def set_customer
     @customer = Customer.find(params[:id])
   end
-  
   def customer_params
     params.require(:customer).permit(
       :family_name,
