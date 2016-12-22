@@ -17,16 +17,15 @@
     <h2>対応履歴</h2>
     <% @comments.each do |comment| %> <!-- commentが引数 -->
       <div class="media-body">
-        <%= image_tag comment.user.image_url , width:50 , alt: "プロフィール画像" %><!-- current_userはログインしているユーザー -->
+        <%= image_tag comment.user.image_url , width:50 , alt: "プロフィール画像", style: "float: left;" %>
         <%= simple_format(comment.body) %>
         <p class="text-muted">
           投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
           <%= link_to "削除する", comment_path(comment), method: :delete %>
         </p>
       </div>
-      <br />
+      <hr>
     <% end %>
-    
     <%= form_for(@comment) do |f| %>
       <% if @comment.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
