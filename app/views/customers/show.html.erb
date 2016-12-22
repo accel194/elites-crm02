@@ -15,18 +15,16 @@
       <%= link_to '戻る', customers_path, class: "btn btn-default" %>
     <hr />
     <h2>対応履歴</h2>
-      <% @comments.each do |comment| %>
-        <div class="media">
-          <%= image_tag current_user.image_url , width:50 , alt: "プロフィール画像" , style: "float: left;" %> 
-          <div class="media-body">
-            <%= simple_format(comment.body) %>
-            <p class="text-muted">
-              投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
-              <%= link_to "削除する", comment_path(comment), method: :delete %>
-            </p>
-          </div>
-        </div>
+    <% @comments.each do |comment| %> <!-- commentが引数 -->
+      <div class="media-body">
+        <%= image_tag comment.user.image_url , width:50 , alt: "プロフィール画像", style: "float: left;" %>
+        <%= simple_format(comment.body) %>
+        <p class="text-muted">
+          投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
+          <%= link_to "削除する", comment_path(comment), method: :delete %>
+        </p>
       </div>
+      <hr>
     <% end %>
     <%= form_for(@comment) do |f| %>
       <% if @comment.errors.any? %>
@@ -37,22 +35,17 @@
             <li><%= comment %></li>
           <% end %>
           </ul>
-          <div><%= @comment.errors.count %> 件のエラーがあります。
-          </div>
-            <ul>
-              <% @comment.errors.full_messages.each do |comment| %>
-                <li><%= comment %></li>
-              <% end %>
-            </ul>
-        </div>    
+        </div>
       <% end %>
     <% end %>
+    <%= image_tag current_user.image_url , width:50 , alt: "プロフィール画像" %>
     <%= form_for(@comment, url: { controller: :comments, action: :create }) do |f| %>
       <div class="form-group">
         <%= f.label :body, '対応内容' %><br>
         <%= f.text_area :body, class: "form-control" %>
       </div>
         <%=f.hidden_field :customer_id, value: @customer.id %>
+        <%=f.hidden_field :user_id, value: current_user.id %>
         <%= f.submit class: "btn btn-default" %>
     <% end %>
   </div>
